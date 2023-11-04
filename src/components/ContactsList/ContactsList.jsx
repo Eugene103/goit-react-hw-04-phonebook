@@ -1,7 +1,7 @@
 import { Container, Item, List, Btn} from "./ContactsList.styled";
 
 
-export const ContactsList = ({ arr,onDell }) => {
+export const ContactsList = ({ arr, onDell }) => {
     return <Container>
         <List>
             {arr.map(({id, name, number}) => (
