@@ -6,20 +6,16 @@ import { Container, Section } from "./GlobalStyle";
 import { FindCont } from "components/FindCont/FindCont";
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem('saved-contacts')
+    if (savedContacts !== null) {
+     return JSON.parse(savedContacts)
+    } return []
+  })
   const [filter, setFilter] = useState(``)
 
   useEffect(() => {
-    const savedContacts = localStorage.getItem('saved-contacts')
-    if (savedContacts !== null) {
-     setContacts(JSON.parse(savedContacts))
-    }
-  }, [])
-  
-  useEffect(() => {
-    if (contacts.length !== 0) {
       localStorage.setItem('saved-contacts', JSON.stringify(contacts))
-    }
   }, [contacts])
   const addContact = (newContact) => {
     const newNameToLower = newContact.name.toLocaleLowerCase()
